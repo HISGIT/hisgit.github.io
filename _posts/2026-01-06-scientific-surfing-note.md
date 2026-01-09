@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to scientific-surfing in personal VPS"
+title:  "How to scientific-surfing using a cloud server"
 date:   2026-01-06 21:15:00 +0900
 categories: blog
 ---
@@ -45,8 +45,11 @@ e. 在“Additional Features”选项卡中，勾选“Enable IPv6”选项，�
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器3.png)
 f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费，费用将会从设置好的虚拟信用卡扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器4.png)
+
 ## VPS设置
+
 ### 1.通过SSH登录VPS
+
 在终端中输入以下命令：
 `ssh root@136.244.95.242`
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/ssh_login.png)
@@ -54,7 +57,8 @@ f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁�
 Linux服务器输入密码时不显示密码，请直接输入密码。
 有时候会因为超时出现断连，重新登录即可。
 
-### 2.安装软件 
+### 2.安装软件
+
 在终端中输入以下命令，基本都是yum 的安装命令，安装一些设置和维护的必要软件。
 ```sh
 #安装第三方软件源
@@ -68,7 +72,8 @@ yum install vim fail2ban -y
 ```
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/安装vim和fail2ban_2.png)![screenshot](/assets/2026-01-06-scientific-surfing-note/安装vim和fail2ban_3.png)
 安装编译工具：
-``` sh
+
+``` js
 #安装编译时必需的软件
 yum install git -y
 yum install wget -y
@@ -85,9 +90,11 @@ yum install c-ares-devel -y
 yum install libev-devel -y
 yum install libsodium-devel -y
 yum install mbedtls-devel -y
-```
+``` 
+
 由于输出内容过多太多，不再截图。为了保证每个安装命令执行成功，建议逐句执行。
 ### 3.编译安装Shadowsocks-libev
+
 ```sh
 #拉取git仓库源代码
 git clone http://github.com/shadowsocks/shadowsocks-libev.git
@@ -102,6 +109,7 @@ make install
 安装成功后可以通过 `ls` 查看安装后的可执行文件位置：
 `ls /usr/bin/ss-server`
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/安装ss-server.png)
+
 ### 4.配置Shadowsocks-libev
 
 安装 Shadowsocks-libev 后，需要进行一些配置。这些配置将确定 Shadowsocks 服务的登录密码，相应的登录端口。
@@ -119,11 +127,10 @@ make install
 "fast_open":false
 }
 ```
-需要将其中的 `"password"` 字段替换为 Shadowsocks 密码，并将 `"server_port"` 字段替换为自定义的端口号。
+需要将其中的 `"password"` 后的字段值替换为自己的 Shadowsocks 密码，并将 `"server_port"` 后的字段值替换为自定义的端口号。
 
-我们建议使用较高的端口号，例如 `8322` 或 `8443`，以避免受到墙对标准端口的封锁。
+建议使用较高的端口号，例如 `8322` 或 `8443`，以避免受到墙对标准端口的封锁。
 最后，配置 Shadowsocks-libev 服务并为它为设置系统启动项：
-他
 `vim /etc/systemd/system/shadowsocks.service`
 ``` sh
 [Unit]
@@ -139,7 +146,7 @@ WantedBy=multi-user.target
 ```
 可以查看一下是否成功编辑文件：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/配置shadowsocks-libev.png)
-增加防火墙端口：
+设置防火墙端口，和配置文件里的`server_port`一致：
 ```sh
 firewall-cmd --zone=public --add-port=8322/tcp --permanent
 firewall-cmd --zone=public --add-port=8322/udp --permanent
@@ -156,8 +163,10 @@ systemctl status shadowsocks
 ```
 
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/查看服务状态和增加防火墙出口.png)
+
 ### 5.简单防护配置
-修改配置文件：
+
+新建并修改配置文件：
 `vim /etc/fail2ban/jail.local`
 把以下内容复制粘贴进去并保存：
 ``` sh
@@ -169,10 +178,11 @@ banaction = iptables-multiport
 [sshd]
 enabled = true
 ```
-设置自启动，重启fai2ban服务
-`systemctl enable fail2ban`
-`systemctl restart fail2ban`
-
+设置自启动，重启fail2ban服务:
+```sh 
+systemctl enable fail2ban
+systemctl restart fail2ban
+```
 修改ssh登录端口。ssh一般用22端口登录，为减少防止服务器被扫描并爆破密码登录，需做一些简单的设置。
 ```sh
 #修改sshd服务配置文件
@@ -200,7 +210,10 @@ systemctl status sshd
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/修改ssh登录配置2.png)
 然后退出服务器，之后都要使用新的端口登录：
 `ssh root@136.244.95.242 -p5408`
-# 快照部署
+
+完成到这一步，其实已经可以跳到后面的说明，使用上面配置里的 `"password"` 、服务器IP和`"server_port"`，
+进行客户端配置然后科学上网了。
+### 快照部署
 在我们设置好服务器之后，当然只想设置一次，如果当前ip因为什么原因无法连接，那就要使用新ip重新部署。这时使用快照部署将无需重新配置，开机即用。
 首先我们要给已经配置好的服务器生成一份快照：![screenshot](/assets/2026-01-06-scientific-surfing-note/生成快照1.png)
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/生成快照2.png)
