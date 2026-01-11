@@ -20,15 +20,22 @@
 
 title: ToT's Blog
 email: totorystal@yahoo.com
-description: >- # this means to ignore newlines until "baseurl:"
+description: > # this means to ignore newlines until "baseurl:"
   daily thought.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://hisgit.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: "-"
+twitter_username: 
 github_username:  HISGIT
+author:
+  name: ToT
+  twitter: 
+  picture: /assets/images/ToT.png
 
 # Build settings
-theme: minima
+# theme configuration see https://github.com/mmistakes/jekyll-theme-basically-basic
+# theme: minima
+theme: jekyll-theme-basically-basic
+search: true
 markdown: kramdown
 plugins:
   - jekyll-feed

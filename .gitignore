@@ -4,3 +4,9 @@ _drafts
 .jekyll-cache
 .jekyll-metadata
 vendor
+.DS_store
+Thumbs.db
+*.swp
+*.bak
+*.tmp
+*.log

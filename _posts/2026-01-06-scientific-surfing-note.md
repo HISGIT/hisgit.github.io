@@ -3,6 +3,7 @@ layout: post
 title:  "How to scientific-surfing using a cloud server"
 date:   2026-01-06 21:15:00 +0900
 categories: blog
+read_time: true
 ---
 
 ## 目录
