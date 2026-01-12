@@ -41,7 +41,7 @@ b. 在Vultr主页上，点击“Deploy New Server”按钮。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器.png)
 c. 在下拉菜单中选择“CentOS 7 x64”，选择你想要的VPS套餐，例如5美元/月的套餐。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器2.png)
-d. 在“Server Location”选项卡中选择你想要的服务器地理位置。
+d. 在“Server Location”选项卡中选择你想要的服务器地理位置。     
 e. 在“Additional Features”选项卡中，勾选“Enable IPv6”选项，并填写你想要设置的主机名。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器3.png)
 f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费，费用将会从设置好的虚拟信用卡扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
@@ -50,7 +50,6 @@ f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁�
 ## VPS设置
 
 ### 1.通过SSH登录VPS
-
 在终端中输入以下命令：
 `ssh root@136.244.95.242`
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/ssh_login.png)
@@ -61,20 +60,20 @@ Linux服务器输入密码时不显示密码，请直接输入密码。
 ### 2.安装软件
 
 在终端中输入以下命令，基本都是yum 的安装命令，安装一些设置和维护的必要软件。
-```sh
+{% highlight shell linenos %}
 #安装第三方软件源
 yum install epel-release -y
 yum update epel-release
-```
+{% endhighlight %}
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/新加软件源1.png)安装vim和fail2ban，在终端中输入以下命令：
-```sh
+{% highlight shell linenos %}
 #安装vim和fail2ban
 yum install vim fail2ban -y
-```
+{% endhighlight %}
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/安装vim和fail2ban_2.png)![screenshot](/assets/2026-01-06-scientific-surfing-note/安装vim和fail2ban_3.png)
 安装编译工具：
 
-``` js
+{% highlight shell linenos %}
 #安装编译时必需的软件
 yum install git -y
 yum install wget -y
@@ -91,12 +90,12 @@ yum install c-ares-devel -y
 yum install libev-devel -y
 yum install libsodium-devel -y
 yum install mbedtls-devel -y
-``` 
+{% endhighlight %} 
 
 由于输出内容过多太多，不再截图。为了保证每个安装命令执行成功，建议逐句执行。
 ### 3.编译安装Shadowsocks-libev
 
-```sh
+{% highlight shell linenos %}
 #拉取git仓库源代码
 git clone http://github.com/shadowsocks/shadowsocks-libev.git
 #切换目录
@@ -105,7 +104,7 @@ cd shadowsocks-libev
 git submodule update --init --recursive
 ./autogen.sh && ./configure --prefix=/usr && make
 make install
-```
+{% endhighlight %}
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/编译安装shadowsocks-libev.png)
 安装成功后可以通过 `ls` 查看安装后的可执行文件位置：
 `ls /usr/bin/ss-server`
@@ -117,7 +116,7 @@ make install
 
 首先，编辑 Shadowsocks-libev 的配置文件：
 `vim /root/config.json`
-```json
+{% highlight json linenos %}
 {
 "server":["::0","0.0.0.0"],
 "server_port":8322,
@@ -127,13 +126,13 @@ make install
 "mode":"tcp_and_udp",
 "fast_open":false
 }
-```
+{% endhighlight %}
 需要将其中的 `"password"` 后的字段值替换为自己的 Shadowsocks 密码，并将 `"server_port"` 后的字段值替换为自定义的端口号。
 
 建议使用较高的端口号，例如 `8322` 或 `8443`，以避免受到墙对标准端口的封锁。
 最后，配置 Shadowsocks-libev 服务并为它为设置系统启动项：
 `vim /etc/systemd/system/shadowsocks.service`
-``` sh
+{% highlight shell linenos %}
 [Unit]
 Description=shadowsocks-libev
 After=network.target
@@ -144,24 +143,24 @@ Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target
-```
+{% endhighlight %}
 可以查看一下是否成功编辑文件：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/配置shadowsocks-libev.png)
 设置防火墙端口，和配置文件里的`server_port`一致：
-```sh
+{% highlight shell linenos %}
 firewall-cmd --zone=public --add-port=8322/tcp --permanent
 firewall-cmd --zone=public --add-port=8322/udp --permanent
 #重新加载防火墙配置
 firewall-cmd --reload
 #重启防火墙服务firewalld
 systemctl restart firewalld
-```
+{% endhighlight %}
 设置自启动并查看运行状态:
-``` sh
+{% highlight shell linenos %}
 systemctl enable shadowsocks
 systemctl start shadowsocks
 systemctl status shadowsocks
-```
+{% endhighlight %}
 
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/查看服务状态和增加防火墙出口.png)
 
@@ -170,7 +169,7 @@ systemctl status shadowsocks
 新建并修改配置文件：
 `vim /etc/fail2ban/jail.local`
 把以下内容复制粘贴进去并保存：
-``` sh
+{% highlight shell linenos %}
 [DEFAULT]
 # Ban hosts for one hour:
 bantime = 3600
@@ -178,36 +177,36 @@ bantime = 3600
 banaction = iptables-multiport
 [sshd]
 enabled = true
-```
+{% endhighlight %}
 设置自启动，重启fail2ban服务:
-```sh 
+{% highlight shell linenos %} 
 systemctl enable fail2ban
 systemctl restart fail2ban
-```
+{% endhighlight %}
 修改ssh登录端口。ssh一般用22端口登录，为减少防止服务器被扫描并爆破密码登录，需做一些简单的设置。
-```sh
+{% highlight shell linenos %}
 #修改sshd服务配置文件
 vim /etc/ssh/sshd_config
-```
+{% endhighlight %}
 找到以下文本：
 `# Port 22`
 修改为：
 `Port 5408`
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/修改ssh登录端口.png)
 然后修改防火墙端口设置，增加刚刚修改的ssh登录端口。
-```sh
+{% highlight shell linenos %}
 firewall-cmd --zone=public --add-port=5408/tcp --permanent
 firewall-cmd --zone=public --add-port=5408/udp --permanent
-```
+{% endhighlight %}
 
-```sh
+{% highlight shell linenos %}
 #重新加载防火墙配置
 firewall-cmd --reload
 #重启防火墙服务firewalld和sshd服务，查看运行状态
 systemctl restart firewalld
 systemctl restart sshd
 systemctl status sshd
-```
+{% endhighlight %}
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/修改ssh登录配置2.png)
 然后退出服务器，之后都要使用新的端口登录：
 `ssh root@136.244.95.242 -p5408`
@@ -226,7 +225,7 @@ systemctl status sshd
 我们看到快照已经准备好了，就可以销毁当前服务器了：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/快照完成.png)
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/销毁旧服务器.png)
-这时已经可以使用快照部署新服务器了，和一开始发布新服务器只有一个地方不同，操作系统 选择那里，选择我们刚才创建的快照然后发布：
+这时已经可以使用快照部署新服务器了，和一开始发布新服务器只有一个地方不同，"操作系统" 选择那里，选择我们刚才创建的快照然后发布：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/操作系统来自快照.png)
 服务器创建成功后，只需要修改客户端的ip配置就能正常使用了。
 注意，新部署的服务器使用新ip和修改后的端口登录用于ssh登录。如果服务器修改了shadowsocks配置配置或者其他配置，需重新生成新的快照，并在后续使用新的快照部署服务器。
@@ -234,9 +233,11 @@ systemctl status sshd
 ss客户端有各种各样，这里仅介绍Windows系统下的客户端设置。其他客户端的设置都大同小异，基本都差不多。
 通过[下载链接](https://github.com/shadowsocks/shadowsocks-windows/releases)下载安装好后，运行客户端然后进行配置：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/客户端配置.png)
+
 客户端设置好后，可以通过分享配置获取配置的二维码：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/获取配置.png)
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/分享配置2.png)
+
 正常运行客户端，如果开了全局代理且运行正常，即可正常科学上网上谷狗：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/全局代理.png)
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/登录谷狗成功.png)
