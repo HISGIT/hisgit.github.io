@@ -11,7 +11,7 @@ tags: Jekyll
 #   - label: "Download"
 #     icon: download  # references name of svg icon, see full list below
 #     url: "http://url-goes-here.com"
-date:   2026-01-20 22:35:00 +0900
+date: 2026-01-20 22:35:00 +0900
 categories: Jekyll
 read_time: true
 introduction: |
@@ -168,3 +168,5 @@ GitHub Pages 使用自定义域名，需要分别在DNS服务商和GitHub账号�
 3. 主题设置和修改
 
 这三部分的内容详细说道。
+
+## 后后话～实现多语言切换功能
