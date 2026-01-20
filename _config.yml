@@ -65,40 +65,4 @@ kramdown:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-# # //TODO:add multiple languages support
-
-# language_default: en
-
-# collections_dir: content
-# collections:
-#   en:
-#     output: true
-#     permalink: /:collection/:slug
-#   zh:
-#     output: true
-#     permalink: /:collection/:slug
-#   ja:
-#     output: true
-#     permalink: /:collection/:slug
-
-# defaults:
-#   - scope:
-#       path: ""
-#       type: "pages"
-#     values:
-#       layout: "page"
-#   - scope:
-#       path: "/content/en/posts"
-#     values:
-#       layout: "post"
-#       permalink: /en/post/:slug
-#   - scope:
-#       path: "/content/zh/posts"
-#     values:
-#       layout: "post"
-#       permalink: /zh/post/:slug
-#   - scope:
-#       path: "/content/ja/posts"
-#     values:
-#       layout: "post"
-#       permalink: /ja/post/:slug
+# //TODO:add multilingual languages support
