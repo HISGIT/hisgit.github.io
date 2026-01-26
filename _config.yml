@@ -17,7 +17,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
+lang: en
 title: ToT's Blog
 email: totorystal@yahoo.com
 description: > # this means to ignore newlines until "baseurl:"
@@ -26,6 +26,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://hisgit.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  HISGIT
+logo: /assets/images/ToT.png
 author:
   name: ToT
   twitter: 
@@ -66,3 +67,32 @@ kramdown:
 #   - vendor/gems/
 #   - vendor/ruby/
 # //TODO:add multilingual languages support
+collections:
+  VPN:
+    output: true
+    permalink: /:collection/:slug/
+defaults:
+ # ---------- EN ----------
+- scope:
+    path: "_posts/en/"
+  values:
+    permalink: /en/:slug/
+    language: en
+    lang_name: English
+    layout: "post"
+ # ---------- JA ----------
+- scope:
+    path: "_posts/ja"
+  values:
+    permalink: /ja/:slug/
+    language: ja
+    lang_name: 日本語
+    layout: "post"
+ # ---------- CH ----------
+- scope:
+    path: "_posts/zh"
+  values:
+    permalink: /zh/:slug/
+    language: zh
+    lang_name: 中文
+    layout: "post"

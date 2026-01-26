@@ -1,0 +1,4 @@
+{% assign posts = site.posts | where:'language', site.lang %}
+{% for post in posts %}
+  {% include entry.html %}
+{% endfor %}
