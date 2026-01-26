@@ -3,6 +3,7 @@ layout: post
 title:  "How to scientific-surfing using a cloud server"
 date:   2026-01-06 21:15:00 +0900
 read_time: true
+ref: scientific-surfing-note
 ---
 
 ## 目录
@@ -43,7 +44,7 @@ c. 在下拉菜单中选择“CentOS 7 x64”，选择你想要的VPS套餐，�
 d. 在“Server Location”选项卡中选择你想要的服务器地理位置。     
 e. 在“Additional Features”选项卡中，勾选“Enable IPv6”选项，并填写你想要设置的主机名。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器3.png)
-f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费，费用将会从设置好的虚拟信用卡扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
+f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费。在每月月初，费用将会从设置好的虚拟信用卡扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器4.png)
 
 ## VPS设置
@@ -52,7 +53,7 @@ f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁�
 在终端中输入以下命令：
 `ssh root@136.244.95.242`
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/ssh_login.png)
-你将需要输入VPS的root用户密码进行登录。为了安全起见，一般建议不要使用root用户进行操作。但在这里为了方便操作服务器，所有命令都用root账号执行。
+在Server Details页面拿到root用户密码，需要输入VPS的root用户密码进行登录。为了安全起见，一般建议不要使用root用户进行操作。但在这里为了方便操作服务器，所有命令都用root账号执行。
 Linux服务器输入密码时不显示密码，请直接输入密码。
 有时候会因为超时出现断连，重新登录即可。
 
@@ -178,7 +179,7 @@ banaction = iptables-multiport
 enabled = true
 {% endhighlight %}
 设置自启动，重启fail2ban服务:
-{% highlight shell linenos %} 
+{% highlight shell linenos %}
 systemctl enable fail2ban
 systemctl restart fail2ban
 {% endhighlight %}
@@ -230,7 +231,7 @@ systemctl status sshd
 注意，新部署的服务器使用新ip和修改后的端口登录用于ssh登录。如果服务器修改了shadowsocks配置配置或者其他配置，需重新生成新的快照，并在后续使用新的快照部署服务器。
 ## 客户端设置
 ss客户端有各种各样，这里仅介绍Windows系统下的客户端设置。其他客户端的设置都大同小异，基本都差不多。
-通过[下载链接](https://github.com/shadowsocks/shadowsocks-windows/releases)下载安装好后，运行客户端然后进行配置：
+通过[official releases page](https://github.com/shadowsocks/shadowsocks-windows/releases)下载安装好后，运行客户端然后进行配置：
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/客户端配置.png)
 
 客户端设置好后，可以通过分享配置获取配置的二维码：
