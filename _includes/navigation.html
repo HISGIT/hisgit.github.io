@@ -1,12 +1,17 @@
-{% assign posts = site.posts | where_exp:'item', "page.ref != nil and item.ref == page.ref" %}
-{% assign segments = page.url | split: '/' %}
-{% assign path = segments | slice: 2, segments.size | join: '/' %}
-{% if posts.size > 0 %}
+{% assign posts_language_version = site.posts | where_exp:'item', "page.ref != nil and item.ref == page.ref" | map: "language" %}
+{% assign path = page.url | split: '/' | slice: 2, segments.size | join: '/' %}
+{% if posts_language_version.size > 0 %}
 <div class="language-selector">
   <ul>
+    {% if posts_language_version contains "en" %}
     <li><a href="/en/{{ path }}" lang="en">English</a></li>
+    {% endif %}
+    {% if posts_language_version contains "zh" %}
     <li><a href="/zh/{{ path }}" lang="zh">中文</a></li>
+    {% endif %}
+    {% if posts_language_version contains "ja" %}
     <li><a href="/ja/{{ path }}" lang="ja">日本語</a></li>
+    {% endif %}
   </ul>
 </div>
 {% endif %}
