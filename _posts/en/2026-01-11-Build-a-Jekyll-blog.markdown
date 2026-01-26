@@ -3,6 +3,7 @@ layout: post
 title:  "Build a Jekyll blog"
 # alt_title: "Basically Basic"
 sub_title: "不会ruby和javascript也没关系"
+tags: Jekyll
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below
@@ -11,6 +12,7 @@ sub_title: "不会ruby和javascript也没关系"
 #     icon: download  # references name of svg icon, see full list below
 #     url: "http://url-goes-here.com"
 date: 2026-01-20 22:35:00 +0900
+categories: Jekyll
 read_time: true
 introduction: |
     **从0开始构建一个通过GitHub Pages部署的静态网页blog**。
