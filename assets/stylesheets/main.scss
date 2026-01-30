@@ -8,3 +8,18 @@
 @import "basically-basic/themes/{{ site.data.theme.skin | default: 'default' }}";
 
 @import "basically-basic";
+
+/* Example CSS to style inline code with a light gray background */
+:not(pre) > code,
+.code-inline { 
+  background-color: #d1dddd98; 
+  color: inherit;          /* keep the text color normal */
+  padding: 0.2em 0.4em;    /* small padding for readability */
+  border-radius: 3px;      /* rounded corners */
+  /* (optional) adjust font or other styles as needed */
+}
+
+/* Ensure code blocks (<pre><code>) keep their own styling, if you changed them: */
+pre > code {
+  background-color: inherit;
+}
