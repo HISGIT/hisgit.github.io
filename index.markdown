@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+<link href="https://wxw.moe/@ToT" rel="me">
