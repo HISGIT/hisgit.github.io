@@ -1,0 +1,163 @@
+from typing import List
+from urllib.parse import urlparse
+import feedparser
+import datetime
+from dateutil.parser import parse
+
+from tqdm import tqdm
+from bs4 import BeautifulSoup
+
+target_file = "_layouts/blogroll.html"
+
+def remove_html_tags(text: str) -> str:
+    soup = BeautifulSoup(text, "html.parser")
+    cleaned_text = soup.get_text()
+    return cleaned_text
+
+
+def get_base_url(feed_url: str) -> str:
+    parsed_url = urlparse(feed_url)
+    return f"{parsed_url.scheme}://{parsed_url.netloc}"
+
+
+def strip_protocol(url: str) -> str:
+    if url.startswith("https://"):
+        return url.lstrip("https://")
+    elif url.startswith("http://"):
+        return url.lstrip("http://")
+    return url
+
+
+def read_websites(filename: str) -> List[str]:
+    with open(filename, "r") as file:
+        return file.read().splitlines()
+
+
+def write_html_with_updates(entries: List[feedparser.FeedParserDict]) -> None:
+    today = datetime.datetime.today()
+    three_months_ago = today - datetime.timedelta(days=90)
+
+    links = []
+    for entry in tqdm(entries):
+        if not hasattr(entry, "links"):
+            continue
+        url = entry.links[0]['href']
+        title = entry.title
+        try:
+            d = entry.get("published") or entry.get("updated")
+            published_date = parse(d, ignoretz=True, fuzzy=True)
+        except Exception:
+            print("Skipping: ", url)
+            continue
+        if published_date >= three_months_ago:
+            links.append((url, title, published_date))
+
+    sorted_links = sorted(links, key=lambda x: x[2], reverse=True)
+
+    html = """---
+layout: default
+# All the Tags of posts.
+---
+    <h1>Blogroll</h1>
+    </br>
+    This is a list of all the posts published by my favourite <a href="https://github.com/HISGIT/hisgit.github.io/blob/master/_data/websites.txt">blogs</a> during the last
+    30 days.
+    </br>
+    </br>
+    <div class="special-list">
+    <ul>
+    """
+
+    for link, title, date in sorted_links:
+        title = remove_html_tags(title)
+        html += f"""
+            <li>
+            <span class="post-date">{date.date()}</span> -
+            <a href='{link}'>{title}</a></li>\n
+        """
+
+    html += """
+    </ul>
+    </div>
+    """
+
+    with open(target_file, "w") as file:
+        file.write(html)
+
+    print("HTML file with updated links generated.")
+def write_html_blog_metadata(
+    entries: List[feedparser.FeedParserDict],
+    target_file: str) -> None:
+    items = []
+
+    for feed in entries:
+        print("Processing feed:", feed.get("feed", {}).get("title", "Unknown Feed"))
+        # link
+        if not hasattr(feed, "feed"):
+            continue
+        feed = feed.get("feed", "")
+        link = feed.get("link", "")
+        print("Feed link:", link)
+
+        # title
+        title = remove_html_tags(feed.get("title", "Untitled"))
+
+        # updated time
+        try:
+            d = feed.get("updated") or feed.get("published")
+            updated_date = parse(d, ignoretz=True, fuzzy=True)
+        except Exception:
+            continue
+
+        # description / summary
+        description = feed.get("summary") or feed.get("description") or ""
+        description = remove_html_tags(description).strip()
+
+        items.append((title, link, updated_date, description))
+
+    # sort by updated time (newest first)
+    items.sort(key=lambda x: x[2], reverse=True)
+
+    html = """---
+layout: default
+---
+<h1>Friends Blog</h1>
+
+<div class="blogroll-meta">
+<ul>
+"""
+
+    for title, link, date, description in items:
+        html += f"""
+            <li>
+            <a href='{link}'>{title}</a> - Last updated: <span class="post-date">{date.date()}</span> -</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Description: {description}</li>
+        """
+
+    html += """
+</ul>
+</div>
+"""
+
+    with open(target_file, "w") as file:
+        file.write(html)
+
+    print(f"Blog metadata HTML generated: {target_file}")
+
+
+def main():
+
+    # Read websites from websites.txt
+    websites = read_websites("_data/websites.txt")
+
+    # Check for updates, aggregate entries
+    entries = []
+    feeds = []
+    for website in tqdm(websites):
+        feed = feedparser.parse(website)
+        feeds.append(feed)
+        # entries += feed.entries
+    # write_html_with_updates(entries)
+    write_html_blog_metadata(feeds, target_file)
+if __name__ == "__main__":
+    main()

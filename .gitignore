@@ -11,3 +11,5 @@ Thumbs.db
 *.tmp
 *.log
 copilot-instructions*
+__??cache__/
+build

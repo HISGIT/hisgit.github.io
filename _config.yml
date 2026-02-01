@@ -55,18 +55,19 @@ kramdown:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
-# //TODO:add multilingual languages support
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  # - gemfiles/
+  # - Gemfile
+  # - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - blog-roll/
+  - build
 collections:
   VPN:
     output: true
