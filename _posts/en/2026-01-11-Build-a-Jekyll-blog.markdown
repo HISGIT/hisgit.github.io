@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Build a Jekyll blog"
-# alt_title: "Basically Basic"
-sub_title: "不会ruby和javascript也没关系"
+sub_title: "even if not understanding ruby or javascrip"
 tags: Jekyll
+ref: build-a-jekyll-blog
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below
@@ -15,99 +15,123 @@ date: 2026-01-20 22:35:00 +0900
 categories: Jekyll
 read_time: true
 introduction: |
-    **从0开始构建一个通过GitHub Pages部署的静态网页blog**。
+    **Build a static blog from scratch and deploy it via GitHub Pages**.
 ---
 
-## 目录
-1. 为什么选jekyll
-2. 本地部署测试
-3. Github构建自动部署
-4. 自定义域名配置
-5. jekyll基本设置
-6. 后话～markdown问题和个性化义主题
-7. 后后话～在多语言版本功能编码之后
+## Table of Contents
+1. Why choose Jekyll
+2. Local deployment and testing
+3. GitHub automatic build and deployment
+4. Custom domain configuration
+5. Afterword — Markdown issues and theme customization
+6. After-afterword — After implementing multilingual support
 
-## 为什么选jekyll
-1. 静态页面，部署简单
-2. 支持Markdown格式编写
-3. 简单但不简陋，通过插件能逐步完善功能
+## Why choose Jekyll
+1. Static pages, easy to deploy
+2. Markdown Supports
+3. Simple, but not simplistic; functionality can be gradually improved through plugins
 
-最终选定了Jekyll。
-## 本地部署测试
-按照[官方文档- > Jekyll on macOS](https://jeky llrb.com/docs/installation/macos/)，需要 先安装Ruby，稍微在这步费了点时间(博主网速比较慢)。
+In the end, pick on Jekyll.
+
+## Local deployment and testing
+According to the [official documentation -> Jekyll on macOS](https://jeky llrb.com/docs/installation/macos/),  
+First you need to install Ruby. I spent a bit of more time on this step due to slowl internet speed.
+
 {% highlight shell linenos %}{% raw %}
-# 通过 curl 拉取ruby安装引导脚本 并交给 bash 执行
+# Use curl to fetch the Ruby installation script and execute it with bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install chruby ruby-install
 ruby-install ruby 3.4.1
-# 将ruby 配置写进shell配置文件 ~/.zshrc
+
+# Write Ruby configuration into the shell config file ~/.zshrc 
+# Or other shell configuration file  like ~/.bashrc depends on your system 
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-3.4.1" >> ~/.zshrc # run 'chruby' to see actual version
-# 重新打开一个新的终端
+
+# Open a new terminal
 ruby -v
 {% endraw %}
 {% endhighlight %}
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/check_ruby_version.png)
-执行到这一步，如果显示出来的ruby 版本和执行 `echo "chruby ruby-3.x.x"` 命令后显示的版本一致，说明安装成功。
+
+At this step, if the displayed Ruby version matches the version shown after running  
+`echo "chruby ruby-3.x.x"`, the installation was successful.
 
 {% highlight shell linenos %}{% raw %}
 gem install bundler jekyll
-# 目录名称myblog 可以改成自己喜欢的名称
+# The directory name myblog can be changed to anything you like
 jekyll new myblog
 cd myblog
-# 本地运行jekyll服务
+# Run the local Jekyll service
 bundle exec jekyll serve
 {% endraw %}
 {% endhighlight %}
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/run_jekyll_serve.png)
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/jekyll_blog.png)
-看到运行成功后提示的服务地址：`Server address: http://127.0.0.1:4000/`，访问这个地址就能看到自己的blog内容。平时也是通过这个方式进行调试和预览文章最终效果。
 
-## Github自动构建部署
+After seeing the successful startup message with the service address  
+`Server address: http://127.0.0.1:4000/`,  
+you can visit this address to see your blog content.  
+This is also the usual way to debug and preview the final appearance of posts.
 
-首先要在gitbug上新建一个代码仓库。
+## GitHub automatic build and deployment
+
+First, create a new repository on GitHub use your GitHub account.
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/creat_new_repository.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/creat_new_repository_1.png)
 
-本地运行成功后，需要上传GitHub仓库，然后再通过GitHub Pages部署我们的代码，也可以说是发布我们的博文啦，震撼首发！
+After the local run succeeds, upload the project to GitHub, then deploy it via GitHub Pages.  
+You could also say this is the official publication of your blog posts — a shocking first release!
+
 {% highlight shell linenos %}{% raw %}
-# 初始化本地Git仓库
+# Initialize a local Git repository
 git init
-# 添加远程Git仓库地址
-# https://github.com/HISGIT/myblog.git 为远程Git仓库地址，请修改为自己的Git仓库地址。
+# Add the remote Git repository address
+# https://github.com/HISGIT/myblog.git is the remote repository address; please change it to your own.
 git remote add origin https://github.com/HISGIT/myblog.git
-# 重命名下主分支名称（？）
+# Rename the main branch
 git branch -M main
-# 添加当前目录下的文件到本地git仓库
+# Add files in the current directory to the local Git repository
 git add .
 git add _post
-# 提交现有的文件和变动
+# Commit existing files and changes
 git commit -m "first commit"
-# 推送到远程git仓库
+# Push to the remote Git repository
 git push -u origin main
 {% endraw %}
 {% endhighlight %}
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/git_push_remote_repository.png)
-这一步完成后接着就在GitHub上操作修改配置。
 
-在GitHub的仓库页面，在`setting->code and automation->pages`修改 `Build and deployment`设置：
+After completing this step, continue configuring things on GitHub.
+
+On the GitHub repository page, go to  
+`setting -> code and automation -> Pages`  
+and modify the `Build and deployment` settings:
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_repository_setting.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_actions_create0.png)
-这里为改为 `Github Aciton`。
+
+Change this to `Github Action`.
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/jekyll_workflowfile_edit_01.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/jekyll_workflowfile_edit_02.png)
-这里我们直接提交，GitHub会自动进行构建并发布。
+
+Here we directly submit it, and GitHub will automatically build and deploy the site.
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_building_01.png)
-在`Action`页面查看构建的详细过程，检查是否有报错。
+
+Check the build process detailes in the `Action` page to see if there are any errors.
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_building_02.png)
-发现报红了，构建失败。点进去看到有重要提示：
+
+It turned red — the build failed.  
+Click red mark and it reveals an important message:
+
 {% highlight shell linenos %}{% raw %}
 Please run `bundle lock --normalize-platforms` and commit the resulting lockfile.
 Alternatively, you may run `bundle lock --add-platform <list-of-platforms-that-you-want-to-support>`
@@ -116,58 +140,75 @@ current version, 3.1.6
 Error: The process '/opt/hostedtoolcache/Ruby/3.1.6/x64/bin/bundle' failed with exit code 5
 {% endraw %}
 {% endhighlight %}
-很明显构建过程中使用的ruby版本太低，需要回头修改下前面的Workflow file：jekyll.yml.
+
+Obviously, the Ruby version used during the build is too old.  
+We need to go back and modify the Workflow file: `jekyll.yml`.
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_change_rubyersion-01.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_change_rubyersion-02.png)
-修改 `ruby-version` 为最新的 `3.4.1` 后重新提交到GitHub仓库。
 
-再进`Action`里查看，看到已经构建并发布成功。
+After changing `ruby-version` to the latest `3.4.1`, submit and push it to the GitHub repository again.
+
+Check `Action` again and you should see that the build and deployment are now successful.
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/action_build_sucessful_01.png)
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/action_build_sucessful_02.png)
 
-然后访问deploy信息里的blog网站地址： http://blog.contextmode.xyz/myblog/ 即可。
-正常应该是类似 [your GitHub username].github.io之类的，比如：http://hisgit.github.io。
-之所以出来的不是GitHub的子域名，因为这里已经启用自定义域名，所以自动从GitHub的子域名
-跳转到自定义域名了。
+Then visit the blog site URL shown in the deploy information:  
+http://blog.contextmode.xyz/myblog/
 
-## 自定义域名配置
-GitHub Pages 使用自定义域名，需要分别在DNS服务商和GitHub账号设置里增加域名设置。
-### GitHub域名认证
-以子域名 `blog.contextmode.xyz` 为例，
+Mostly it should look like  [your GitHub username].github.io,
+for example: http://hisgit.github.io.
+
+Because a custom domain has already been enabled in my repository, it’s not a GitHub subdomain here.  
+it automatically redirects from the GitHub subdomain to the custom domain.
+
+## Custom domain configuration
+To use a custom domain with GitHub Pages, you need to add domain settings  
+both at your DNS provider and in your GitHub account settings.
+
+### GitHub domain verification
+Using the subdomain `blog.contextmode.xyz` as an example:
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_account_domain_varification_01.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_account_domain_varification_02.png)
-
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_account_domain_varification_03.png)
-复制这里给出的两个值，需要在DNS服务商那里作为配置使用。
 
-### DNS配置
-在DNS服务（托管）商，比如cloudflare中，添加TXT记录。
+Copy the two values provided here; they will be used in the DNS provider configuration.
 
-进入Domains管理，点击相应的域名。
-在里面找到DNS配置，增加一条recodes，type为TXT记录，将刚才复制出来的值分别放到Name和Content
-中。
+### DNS configuration
+At your DNS (hosting) provider, such as Cloudflare, add a TXT record.
+
+Go to domain management, select the relevant domain,  
+find the DNS settings, and add a record with type TXT.  
+Paste the copied values into the Name and Content fields separately.
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_account_domain_varification_04.png)
-点击保存，然后等待生效。
+
+Click save and wait for it to take effect.
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_account_domain_varification_05.png)
-在这里能看到是否验证成功，绿色的Verified 和 红色Unverified。有时DNS生效需要些时间，请耐心等待。
 
-### 增加CNAME指向GitHub Pages
-如下图，在DNS管理中增加CNAME指向刚才发布成功后提示的[your GitHub username].github.io地址。
+Here you can see whether verification succeeded — green for Verified, red for Unverified.  
+Sometimes DNS propagation takes a little more time, so please be patient.
+
+### Add a CNAME pointing to GitHub Pages
+As shown below, add a CNAME record in DNS management  
+pointing to the [your GitHub username].github.io address shown after deploy successfully.
+
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/cname_to_github_pages.png)
 
-全部配置完成后，不管在访问[your GitHub username].github.io 还是 自定义域名 时，最终都是访问 自定义域名。本质上就是通过配置实现了访问GitHub Pages时自动跳转到自己的域名。
-## 后话～markdown和个性化义主题
-后续将会对
-1. Jekyll中的markdown使用
-2. 高亮和代码块显示
-3. 主题设置和修改
+After all configurations are complete, whether you access  
+[your GitHub username].github.io or the custom domain,  
+you will reach the custom domain at last.  
+Essentially, this setup redirects GitHub Pages traffic to your own domain.
 
-这三部分的内容详细说道。
+## Afterword — Markdown and theme customization
+In follow-up posts, the following topics will be discussed in detail:
+1. Using Markdown in Jekyll
+2. Syntax highlighting and code block display
+3. Theme setup and customization
 
-## 后后话～实现多语言切换功能
-开发中。
+## After-afterword — Implementing multilingual support
+done.

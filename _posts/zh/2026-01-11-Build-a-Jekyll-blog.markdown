@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Build a Jekyll blog"
-# alt_title: "Basically Basic"
+alt_title: "建一个Jekyll博客"
 sub_title: "不会ruby和javascript也没关系"
+ref: build-a-jekyll-blog
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below
@@ -17,15 +18,14 @@ introduction: |
 ---
 
 ## 目录
-1. 为什么选jekyll
+1. 为什么选Jekyll
 2. 本地部署测试
 3. Github构建自动部署
 4. 自定义域名配置
-5. jekyll基本设置
-6. 后话～markdown问题和个性化义主题
-7. 后后话～在多语言版本功能编码之后
+5. 后话～markdown问题和个性化义主题
+6. 后后话～在多语言版本功能编码之后
 
-## 为什么选jekyll
+## 为什么选Jekyll
 1. 静态页面，部署简单
 2. 支持Markdown格式编写
 3. 简单但不简陋，通过插件能逐步完善功能
@@ -34,15 +34,18 @@ introduction: |
 ## 本地部署测试
 按照[官方文档- > Jekyll on macOS](https://jeky llrb.com/docs/installation/macos/)，需要 先安装Ruby，稍微在这步费了点时间(博主网速比较慢)。
 {% highlight shell linenos %}{% raw %}
-# 通过 curl 拉取ruby安装引导脚本 并交给 bash 执行
+# Use curl to fetch the Ruby installation bootstrap script and execute it with bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install chruby ruby-install
 ruby-install ruby 3.4.1
-# 将ruby 配置写进shell配置文件 ~/.zshrc
+
+# Write Ruby configuration into the shell config file ~/.zshrc 
+# Or other shell configuration file  like ~/.bashrc depends on your system
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-3.4.1" >> ~/.zshrc # run 'chruby' to see actual version
-# 重新打开一个新的终端
+
+# Open a new terminal
 ruby -v
 {% endraw %}
 {% endhighlight %}
@@ -51,10 +54,10 @@ ruby -v
 
 {% highlight shell linenos %}{% raw %}
 gem install bundler jekyll
-# 目录名称myblog 可以改成自己喜欢的名称
+# The directory name myblog can be changed to anything you like
 jekyll new myblog
 cd myblog
-# 本地运行jekyll服务
+# Run the local Jekyll service
 bundle exec jekyll serve
 {% endraw %}
 {% endhighlight %}
@@ -71,26 +74,26 @@ bundle exec jekyll serve
 
 本地运行成功后，需要上传GitHub仓库，然后再通过GitHub Pages部署我们的代码，也可以说是发布我们的博文啦，震撼首发！
 {% highlight shell linenos %}{% raw %}
-# 初始化本地Git仓库
+# Initialize a local Git repository
 git init
-# 添加远程Git仓库地址
-# https://github.com/HISGIT/myblog.git 为远程Git仓库地址，请修改为自己的Git仓库地址。
+# Add the remote Git repository address
+# https://github.com/HISGIT/myblog.git is the remote repository address; please change it to your own.
 git remote add origin https://github.com/HISGIT/myblog.git
-# 重命名下主分支名称（？）
+# Rename the main branch (?)
 git branch -M main
-# 添加当前目录下的文件到本地git仓库
+# Add files in the current directory to the local Git repository
 git add .
 git add _post
-# 提交现有的文件和变动
+# Commit existing files and changes
 git commit -m "first commit"
-# 推送到远程git仓库
+# Push to the remote Git repository
 git push -u origin main
 {% endraw %}
 {% endhighlight %}
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/git_push_remote_repository.png)
 这一步完成后接着就在GitHub上操作修改配置。
 
-在GitHub的仓库页面，在`setting->code and automation->pages`修改 `Build and deployment`设置：
+在GitHub的仓库页面，在`setting->code and automation->Pages`修改 `Build and deployment`设置：
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_repository_setting.png)
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/github_actions_create0.png)
@@ -127,7 +130,7 @@ Error: The process '/opt/hostedtoolcache/Ruby/3.1.6/x64/bin/bundle' failed with 
 
 然后访问deploy信息里的blog网站地址： http://blog.contextmode.xyz/myblog/ 即可。
 正常应该是类似 [your GitHub username].github.io之类的，比如：http://hisgit.github.io。
-之所以出来的不是GitHub的子域名，因为这里已经启用自定义域名，所以自动从GitHub的子域名
+之所以出来的不是GitHub的子域名，因为在我的仓库已经启用了自定义域名，所以自动从GitHub的子域名
 跳转到自定义域名了。
 
 ## 自定义域名配置
@@ -168,4 +171,4 @@ GitHub Pages 使用自定义域名，需要分别在DNS服务商和GitHub账号�
 这三部分的内容详细说道。
 
 ## 后后话～实现多语言切换功能
-开发中。
+完成。

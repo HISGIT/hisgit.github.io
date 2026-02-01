@@ -1,9 +1,13 @@
 ---
 layout: post
 title:  "How to scientific-surfing using a cloud server"
+alt_title: "如何使用云服务器科学上网"
 date:   2026-01-06 21:15:00 +0900
 read_time: true
 ref: scientific-surfing-note
+introduction: |
+    -- 实际上，这篇指南在三年前就已经完成了，不过当时只是通过邮件发给了两位朋友。
+    为了庆祝新博客的上线，我稍微修改了一下，现在正式发布。--
 ---
 
 ## 目录
@@ -14,7 +18,7 @@ ref: scientific-surfing-note
 * 客户端设置
 
 ## 预备
-自建梯子对大部分没有使用过Linux的用户来说，可能最难以理解的部分在于命令行操作。本文认为自建需要的最基础的命令行操作为以下几个，
+自建梯子对大部分没有使用过Linux的人来说，可能最难以理解的部分在于命令行操作。本文认为自建需要的最基础的命令行操作为以下几个，
 
 ssh  `#用于远程登录服务器`
 
@@ -30,12 +34,13 @@ vim  `#编辑文件`
 虽然也有购买VPS时也有其他支付方式，但是虚拟信用卡便利性更好。
 - a. 前往[全球付](https://www.globalcash.hk/v4/)官网，点击“注册”按钮进入注册页面。
 - b. 在注册页面输入你的邮箱地址和手机号码（+86手机号也可），并创建一个密码。
-- c. 验证你的邮箱和手机号码，填写你的基本信息，如姓名、身份证号码等。不是必须填写真实姓名地址，但是需要可用的手机号码接- - 收短信验证码。
+- c. 验证你的邮箱和手机号码，填写你的基本信息，如姓名、身份证号码等。不是必须填写真实姓名地址，但是需要可用的手机号码接收短信验证码。
 - d. 在全球付官网充值页面，选择一个充值方式，如银行卡、支付宝等，完成充值。
 - e. 用全球付虚拟信用卡进行VPS购买时，请确保你的虚拟信用卡余额足够支付，也需要保证卡内没有超过限制的未支付订单，否则可能会导致支付失败。
 
 ## 购买Vultr VPS
 a. 前往[Vultr](https://www.vultr.com)官网，注册一个账户并登录（通过另外一些链接有[**Vultr赠送金额**](https://zhuanlan.zhihu.com/p/40144588)或者联系本文作者获取）。
+
 b. 在Vultr主页上，点击“Deploy New Server”按钮。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器0.png)
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器.png)
@@ -44,7 +49,7 @@ c. 在下拉菜单中选择“CentOS 7 x64”，选择你想要的VPS套餐，�
 d. 在“Server Location”选项卡中选择你想要的服务器地理位置。     
 e. 在“Additional Features”选项卡中，勾选“Enable IPv6”选项，并填写你想要设置的主机名。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器3.png)
-f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费。在每月月初，费用将会从设置好的虚拟信用卡扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
+f. 点击“Deploy Now”按钮，服务器会按照小时计费，只有销毁服务器才能停止计费。在每月月初，费用将会从设置好的虚拟信用卡或者账号余额扣款。服务器发布完成后，点击server details里查看ip地址和用于登录的账号密码。
 ![screenshot](/assets/2026-01-06-scientific-surfing-note/发布新服务器4.png)
 
 ## VPS设置

@@ -3,6 +3,7 @@ layout: post
 title:  "That way we make it and again"
 date:   2026-01-16 23:25:00 +0900
 read_time: true
+ref: that-way-we-make-it-and-again
 introduction: |
     -- **不爽了就去兜风吧** --
 ---
