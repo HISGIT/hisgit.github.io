@@ -4,7 +4,8 @@
       {% if site.copyright %}
         {{ site.copyright | markdownify }}
       {% else %}
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}.</p>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }},
+      {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/jekyll-theme-basically-basic" rel="nofollow">jekyll-theme-basically-basic</a>.</p>
       {% endif %}
     </div>
   </div>
