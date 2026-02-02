@@ -86,18 +86,20 @@ layout: default
 
     print("HTML file with updated links generated.")
 def write_html_blog_metadata(
-    entries: List[feedparser.FeedParserDict],
+    feed_list: List[feedparser.FeedParserDict],
     target_file: str) -> None:
     items = []
+    entries_per_feed = 3
 
-    for feed in entries:
+    for feed in feed_list:
+        entries = []
         print("Processing feed:", feed.get("feed", {}).get("title", "Unknown Feed"))
         # link
         if not hasattr(feed, "feed"):
             continue
+        entries = feed.entries
         feed = feed.get("feed", "")
         link = feed.get("link", "")
-        print("Feed link:", link)
 
         # title
         title = remove_html_tags(feed.get("title", "Untitled"))
@@ -113,13 +115,33 @@ def write_html_blog_metadata(
         description = feed.get("summary") or feed.get("description") or ""
         description = remove_html_tags(description).strip()
 
-        items.append((title, link, updated_date, description))
+        # fetch only the latest 3 entry for each feed
+        today = datetime.datetime.today()
+        three_months_ago = today - datetime.timedelta(days=90)
 
+        links = []
+        for entry in tqdm(entries):
+            if not hasattr(entry, "links"):
+                continue
+            url = entry.links[0]['href']
+            entry_title = entry.title
+            try:
+                d = entry.get("published") or entry.get("updated")
+                published_date = parse(d, ignoretz=True, fuzzy=True)
+            except Exception:
+                print("Skipping: ", url)
+                continue
+            if published_date >= three_months_ago:
+                links.append((url, entry_title, published_date))
+        sorted_links = sorted(links, key=lambda x: x[2], reverse=True)
+        sorted_links = sorted_links[:entries_per_feed]
+
+        items.append((title, link, updated_date, description, sorted_links))
     # sort by updated time (newest first)
     items.sort(key=lambda x: x[2], reverse=True)
 
     html = """---
-layout: default
+layout: page
 ---
 <h1>Friends Blog</h1>
 
@@ -127,11 +149,20 @@ layout: default
 <ul>
 """
 
-    for title, link, date, description in items:
+    for title, link, date, description, sorted_links in items:
         html += f"""
             <li>
-            <a href='{link}'>{title}</a> - Last updated: <span class="post-date">{date.date()}</span> -</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Description: {description}</li>
+            <strong><a href='{link}'>{title}</a></strong> - Last updated: <span class="post-date">{date.date()}</span> .</br>
+            Description: {description}
+            <ul>
+        """
+        for entry_link, entry_title, published_date in sorted_links:    
+            html += f"""<li>
+            <span class="post-date">{published_date.date()}</span> - 
+            <a href='{entry_link}'>{entry_title}</a></li>\n
+            """
+        html += """</ul>
+            </li>
         """
 
     html += """
@@ -156,7 +187,7 @@ def main():
     for website in tqdm(websites):
         feed = feedparser.parse(website)
         feeds.append(feed)
-        # entries += feed.entries
+        entries += feed.entries
     # write_html_with_updates(entries)
     write_html_blog_metadata(feeds, target_file)
 if __name__ == "__main__":
