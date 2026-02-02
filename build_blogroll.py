@@ -98,6 +98,7 @@ def write_html_blog_metadata(
         if not hasattr(feed, "feed"):
             continue
         entries = feed.entries
+        headers = feed.get("headers", {})
         feed = feed.get("feed", "")
         link = feed.get("link", "")
 
@@ -106,7 +107,7 @@ def write_html_blog_metadata(
 
         # updated time
         try:
-            d = feed.get("updated") or feed.get("published")
+            d = feed.get("updated") or feed.get("published") or headers.get("date")
             updated_date = parse(d, ignoretz=True, fuzzy=True)
         except Exception:
             continue

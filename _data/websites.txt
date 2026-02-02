@@ -1,2 +1,3 @@
 https://phantomcarrousel.com/index.xml
 https://blog.loikein.one/index.xml
+https://feed.fivest.one
