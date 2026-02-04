@@ -1,5 +1,5 @@
 ---
 layout: blogroll
-title: Blogroll
+title: Links
 permalink: /blogroll/
 ---
