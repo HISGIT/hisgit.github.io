@@ -138,8 +138,8 @@ def write_html_blog_metadata(
         sorted_links = sorted_links[:entries_per_feed]
 
         items.append((title, link, updated_date, description, sorted_links))
-    # sort by updated time (newest first)
-    items.sort(key=lambda x: x[2], reverse=True)
+    # sort by updated time (newest blog-post first)
+    items.sort(key=lambda x: x[4][2], reverse=True)
 
     html = """---
 layout: page
