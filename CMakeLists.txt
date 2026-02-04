@@ -17,15 +17,15 @@ add_custom_command(
     COMMAND git add build_blogroll.py _data/websites.txt
 
     # 3. Commit & push only if there are changes
-    # COMMAND git diff --cached --quiet
-    #        || (git commit -m "Update blogroll config" && git push)
+    COMMAND git diff --cached --quiet
+           || (git commit -m "Update Links page" && git push)
 
     DEPENDS
         build_blogroll.py
         _data/websites.txt
 
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMENT "Build blogroll + auto git commit & push"
+    COMMENT "Build Links page + auto git commit & push"
 )
 
 # ---- Default build target ----
