@@ -9,9 +9,7 @@ ref: when-diary-is-not-just-a-record
 introduction: |
     -- **日记百篇，其意自现。关于适合做什么的一些想法～！？** --
 ---
-
-EMMO写日记
-从大概三年前开始的，但是头三年没怎么坚持下来。
+从大概三年前用EMMO写日记开始的，但是头三年没怎么坚持下来。
 
 ![スクリーンショット](/assets/post_images/2026-02-04-when-diary-is-not-just-a-record/スクリーンショット 2026-02-04 19.39.12.png)
 
