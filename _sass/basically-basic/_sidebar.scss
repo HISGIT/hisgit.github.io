@@ -167,12 +167,17 @@
 
 .header-right {
   position: absolute;
-  top: 2.5rem;
-  right: 8rem;
+  top: 0rem;
+  right: 0rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 1.8125rem 1rem 0 0;
+  @include breakpoint($medium) {
+    right: 3rem;
+  }
+  @include breakpoint($large) {
+    right: 6rem;
+  }
 }
 
 .language-selector-header ul {
@@ -181,10 +186,18 @@
   margin: 0;
   padding: 0;
   gap: 0.25rem;
+  @include breakpoint($medium) {
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
 }
 
 .language-selector-header a {
   padding: 0.25rem 0.5rem;
   color: $text-color;
   text-decoration: none;
+  white-space: nowrap;
+  &:hover {
+    opacity: 0.7;
+  }
 }
