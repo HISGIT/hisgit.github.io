@@ -164,3 +164,27 @@
   font-weight: bold;
   color: $text-color;
 }
+
+.header-right {
+  position: absolute;
+  top: 0;
+  right: 10rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.8125rem 1rem 0 0;
+}
+
+.language-selector-header ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.language-selector-header a {
+  padding: 0.25rem 0.5rem;
+  color: $text-color;
+  text-decoration: none;
+}
