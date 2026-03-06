@@ -5,6 +5,10 @@ alt_title: "クラウドサーバーでVPNを構築しファイアウォール�
 date:   2026-01-06 21:15:00 +0900
 read_time: true
 ref: scientific-surfing-note
+comments:
+  host: wxw.moe
+  username: ToT
+  id: 115868410262121328
 introduction: |
     -- 実はこの記事、三年前にすで完成していたんです、でも当時はメールで友達２人に送っただけ。
     今回、新しいブログの立ち上がりを祝いに少し書き直して公開します。 --

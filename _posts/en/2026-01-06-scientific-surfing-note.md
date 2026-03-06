@@ -6,6 +6,10 @@ categories: blog
 collection: VPN
 read_time: true
 ref: scientific-surfing-note
+comments:
+  host: wxw.moe
+  username: ToT
+  id: 115868410262121328
 introduction: |
     -- Actually this guid was completed 3 years ago, but I only send it by email to two friends.
     To celebrate my new blog's opening, I've revised it slightly and publishing it now. --

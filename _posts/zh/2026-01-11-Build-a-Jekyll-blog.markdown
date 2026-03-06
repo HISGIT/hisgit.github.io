@@ -4,6 +4,10 @@ title:  "Build a Jekyll blog"
 alt_title: "建一个Jekyll博客"
 sub_title: "不会ruby和javascript也没关系"
 ref: build-a-jekyll-blog
+comments:
+  host: bgme.me
+  username: ToT
+  id: 116017511628147672
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below

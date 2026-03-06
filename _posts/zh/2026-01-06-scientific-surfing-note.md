@@ -5,6 +5,10 @@ alt_title: "如何使用云服务器科学上网"
 date:   2026-01-06 21:15:00 +0900
 read_time: true
 ref: scientific-surfing-note
+comments:
+  host: wxw.moe
+  username: ToT
+  id: 115868410262121328
 introduction: |
     -- 实际上，这篇指南在三年前就已经完成了，不过当时只是通过邮件发给了两位朋友。
     为了庆祝新博客的上线，我稍微修改了一下，现在正式发布。--

@@ -6,8 +6,12 @@ categories: [blog,]
 tag: ['daily thoughts']
 read_time: true
 ref: that-way-we-make-it-and-again
-introduction: |
-    -- **when you’re fed up, go for a drive** --
+comments:
+  host: bgme.me
+  username: ToT
+  id: 115905457851765384
+iidntroduction: |
+    -- **when you’reoT fed up, go for a drive** --
 ---
 I’m feeling really upset inside and need some kind of release.
 

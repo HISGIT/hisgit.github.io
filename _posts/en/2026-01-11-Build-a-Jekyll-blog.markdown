@@ -4,6 +4,10 @@ title:  "Build a Jekyll blog"
 sub_title: "even if not understanding ruby or javascrip"
 tags: Jekyll
 ref: build-a-jekyll-blog
+comments:
+  host: bgme.me
+  username: ToT
+  id: 116017511628147672
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below

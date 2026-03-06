@@ -6,6 +6,10 @@ alt_title: 当日记不仅是日志
 tag: ['daily thoughts']
 read_time: true
 ref: when-diary-is-not-just-a-record
+comments:
+  host: bgme.me
+  username: ToT
+  id: 116012583253296032
 introduction: |
     -- **日记百篇，其意自现。关于适合做什么的一些想法～！？** --
 ---
