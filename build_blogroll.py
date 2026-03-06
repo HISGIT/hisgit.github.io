@@ -129,17 +129,18 @@ def write_html_blog_metadata(
             try:
                 d = entry.get("published") or entry.get("updated")
                 published_date = parse(d, ignoretz=True, fuzzy=True)
+                print(description,",published_date:",published_date,"three_months_ago:",three_months_ago)
             except Exception:
                 print("Skipping: ", url)
                 continue
             if published_date >= three_months_ago:
                 links.append((url, entry_title, published_date))
+            # x[2] is published_date
         sorted_links = sorted(links, key=lambda x: x[2], reverse=True)
         sorted_links = sorted_links[:entries_per_feed]
-
         items.append((title, link, updated_date, description, sorted_links))
     # sort by updated time (newest blog-post first)
-    items.sort(key=lambda x: x[2], reverse=True)
+    items.sort(key=lambda x: x[4][0][2], reverse=True)
 
     html = """---
 layout: page
