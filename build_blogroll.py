@@ -139,7 +139,7 @@ def write_html_blog_metadata(
 
         items.append((title, link, updated_date, description, sorted_links))
     # sort by updated time (newest blog-post first)
-    items.sort(key=lambda x: x[4][2], reverse=True)
+    items.sort(key=lambda x: x[2], reverse=True)
 
     html = """---
 layout: page
