@@ -129,7 +129,6 @@ def write_html_blog_metadata(
             try:
                 d = entry.get("published") or entry.get("updated")
                 published_date = parse(d, ignoretz=True, fuzzy=True)
-                print(description,",published_date:",published_date,"three_months_ago:",three_months_ago)
             except Exception:
                 print("Skipping: ", url)
                 continue
