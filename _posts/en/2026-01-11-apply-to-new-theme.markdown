@@ -3,7 +3,7 @@ layout: post #default,post,page,home,categories,tags,collection,category,tag
 title:  "Feel Free to Customize the Theme Code"
 # alt_title: "Basically Basic"
 sub_title: "Theme customisation leads to code the theme by yourself"
-date:   2026-02-03 22:00:00 +0900
+date:   2026-03-14 21:50:00 +0900
 categories: Jekyll
 read_time: true
 ref: apply-to-new-theme
