@@ -121,7 +121,7 @@ current version, 3.1.6
 Error: The process '/opt/hostedtoolcache/Ruby/3.1.6/x64/bin/bundle' failed with exit code 5
 {% endraw %}
 {% endhighlight %}
-很明显构建过程中使用的ruby版本太低，需要回头修改下前面的Workflow file：jekyll.yml.
+很明显构建过程中使用的ruby版本太低，需要回头修改下前面的Workflow file：`jekyll.yml`.
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_change_rubyersion-01.png)
 
 ![screenshot](/assets/2026-01-11-Build-a-Jekyll-blog/workflow_actions_change_rubyersion-02.png)

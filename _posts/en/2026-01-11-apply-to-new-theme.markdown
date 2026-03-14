@@ -42,7 +42,7 @@ However, it is too basic to meet my needs. As a regular user (not a developer), 
 ## install theme in different ways
 Install by Ruby gem or using Git follow the README of the github repository.
 
-Install by Ruby gem is the easiest way. Just change the code in `_config.yml` and `Gemfile` like below:
+Install by Ruby gem is the easiest way. Just change the code in `_config.yml` and `Gemfile` like below. 
 Add this line to your Jekyll site's `Gemfile`:
 {% highlight json linenos %}
 gem "jekyll-theme-basically-basic"
