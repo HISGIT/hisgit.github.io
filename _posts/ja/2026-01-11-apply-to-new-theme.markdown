@@ -6,7 +6,7 @@ sub_title: "テーマのカスタマイズは自分でコードを書く道に�
 date:   2026-02-03 22:00:00 +0900
 categories: Jekyll
 read_time: true
-ref: apply-to-new-theme
+# ref: apply-to-new-theme
 introduction: |
     Basically Basic は Jekyll デフォルトテーマの代わりものとしている --- [Minima](https://github.com/jekyll/minima). Minimaにある全ての便利性と機能も整っていて、**Basically Basic**である。
 ---
