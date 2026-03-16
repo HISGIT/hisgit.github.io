@@ -246,26 +246,30 @@ When publishing a post, simply write a toot linking to your article. The post pa
 <p style="text-align: center; font-weight: bold;">Loaded comments</p>
 
 ## Change Font Style
-After exploring the *[Revivance Blog](https://revivance.blog)*, I was impressed by its ***typography*** font style and decided to adopt a similar font style for my blog. I updated the `theme.yml` file in the `_data` folder as follows:
-{% highlight json linenos %}{% raw %}
-  - name: "Freight Display W03"
-    weights: "400,600,700"
-  - name: "Source Serif Pro"
-    weights: "400,400i,600,600i"
-{% endraw %}{% endhighlight %}
+After exploring the *[Revivance Blog](https://revivance.blog)*, I was impressed by its ***typography*** font style and decided to adopt a similar font style for my blog.
 
-Add the SCSS file *[_typography.scss](https://github.com/HISGIT/hisgit.github.io/blob/main/_sass/basically-basic/_typography.scss)* in the `_sass/basically-basic/` folder to import the font styles in `_sass/basically-basic.scss`:
+Change the SCSS file *[_sass/basically-basic/_base.scss](https://github.com/HISGIT/hisgit.github.io/blob/main/_sass/basically-basic/_base.scss)* in the `body` section:
 {% highlight css linenos %}{% raw %}
-@import "basically-basic/typography";
+body {
+  background: $background-color;
+  color: #333;
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.53;
+  font-variant-ligatures: normal;
+  text-rendering: optimizeLegibility;
+}
 {% endraw %}{% endhighlight %}
 
-To alter the title font style, I updated the code in `_sass/basically-basic/_variables.scss`:
+To alter the title font style, I updated the code in `_sass/basically-basic/_variables.scss`, configured the base font family from the original:
 {% highlight css linenos %}{% raw %}
 $base-font-family: "Fira Sans", sans-serif !default;
 {% endraw %}{% endhighlight %}
 To:
 {% highlight css linenos %}{% raw %}
-$base-font-family: "Freight Display W03 Book", "Noto Serif SC", georgia, "Songti SC", Simsun, serif;
+$base-font-family: "Freight Text W03 Book", "Noto Serif SC", georgia, "Songti SC", Simsun, serif;
 {% endraw %}{% endhighlight %}
 done.
 
