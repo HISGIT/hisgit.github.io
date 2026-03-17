@@ -11,5 +11,6 @@ Thumbs.db
 *.tmp
 *.log
 copilot-instructions*
+translate_rule.md
 __??cache__/
 build

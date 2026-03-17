@@ -241,6 +241,7 @@ comments:
 {% endraw %}
 {% endhighlight %}
 ![Screenshot](/assets/post_images/2026-01-11-apply-to-new-theme/comments_frontmatter.png)
+
 When publishing a post, simply write a toot linking to your article. The post page will display a button to load comments instead of loading them for every request.
 ![Screenshot](/assets/post_images/2026-01-11-apply-to-new-theme/loaded_comments.png)
 <p style="text-align: center; font-weight: bold;">Loaded comments</p>
