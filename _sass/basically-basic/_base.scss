@@ -9,6 +9,7 @@ html {
 body {
   background: $background-color;
   color: #333;
+  font-family: $base-font-family;
   font-feature-settings: "lnum" 1;
   font-variant-numeric: lining-nums;
   font-size: 18px;
@@ -16,6 +17,20 @@ body {
   line-height: 1.53;
   font-variant-ligatures: normal;
   text-rendering: optimizeLegibility;
+}
+
+.intro[lang^="zh"],
+.entry-wrap[lang^="zh"],
+.intro [lang^="zh"],
+.entry-wrap [lang^="zh"] {
+  font-family: $cjk-serif-font-family-zh;
+}
+
+.intro[lang^="ja"],
+.entry-wrap[lang^="ja"],
+.intro [lang^="ja"],
+.entry-wrap [lang^="ja"] {
+  font-family: $cjk-serif-font-family-ja;
 }
 
 blockquote,

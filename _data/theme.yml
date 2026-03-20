@@ -1,5 +1,9 @@
 skin: soft
 google_fonts:
+  - name: "Noto Serif SC"
+    weights: "400,500,700"
+  - name: "Noto Serif JP"
+    weights: "400,500,700"
   - name: "Fira Sans"
     weights: "400,400i,600,600i"
 
