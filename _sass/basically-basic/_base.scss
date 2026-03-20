@@ -26,10 +26,32 @@ body {
   font-family: $cjk-serif-font-family-zh;
 }
 
+.intro[lang^="zh"] .intro-title,
+.entry-wrap[lang^="zh"] h1,
+.entry-wrap[lang^="zh"] h2,
+.entry-wrap[lang^="zh"] h3,
+.entry-wrap[lang^="zh"] h4,
+.entry-wrap[lang^="zh"] h5,
+.entry-wrap[lang^="zh"] h6,
+.language-selector-header a[lang^="zh"] {
+  font-family: $cjk-serif-font-family-zh;
+}
+
 .intro[lang^="ja"],
 .entry-wrap[lang^="ja"],
 .intro [lang^="ja"],
 .entry-wrap [lang^="ja"] {
+  font-family: $cjk-serif-font-family-ja;
+}
+
+.intro[lang^="ja"] .intro-title,
+.entry-wrap[lang^="ja"] h1,
+.entry-wrap[lang^="ja"] h2,
+.entry-wrap[lang^="ja"] h3,
+.entry-wrap[lang^="ja"] h4,
+.entry-wrap[lang^="ja"] h5,
+.entry-wrap[lang^="ja"] h6,
+.language-selector-header a[lang^="ja"] {
   font-family: $cjk-serif-font-family-ja;
 }
 
