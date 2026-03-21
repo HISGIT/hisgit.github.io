@@ -21,6 +21,8 @@ body {
 
 .intro[lang^="zh"],
 .entry-wrap[lang^="zh"],
+.blogroll-meta [lang^="zh"],
+#comments [lang^="zh"],
 .intro [lang^="zh"],
 .entry-wrap [lang^="zh"] {
   font-family: $cjk-serif-font-family-zh;
@@ -39,6 +41,8 @@ body {
 
 .intro[lang^="ja"],
 .entry-wrap[lang^="ja"],
+.blogroll-meta [lang^="ja"],
+#comments [lang^="ja"],
 .intro [lang^="ja"],
 .entry-wrap [lang^="ja"] {
   font-family: $cjk-serif-font-family-ja;

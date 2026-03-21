@@ -2,12 +2,16 @@ from typing import List
 from urllib.parse import urlparse
 import feedparser
 import datetime
+import re
 from dateutil.parser import parse
 
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 
 target_file = "_layouts/blogroll.html"
+
+HIRAGANA_OR_KATAKANA_RE = re.compile(r"[\u3040-\u30ff]")
+HAN_RE = re.compile(r"[\u3400-\u9fff]")
 
 def remove_html_tags(text: str) -> str:
     soup = BeautifulSoup(text, "html.parser")
@@ -31,6 +35,21 @@ def strip_protocol(url: str) -> str:
 def read_websites(filename: str) -> List[str]:
     with open(filename, "r") as file:
         return file.read().splitlines()
+
+
+def detect_lang(text: str) -> str:
+    if not text:
+        return ""
+    if HIRAGANA_OR_KATAKANA_RE.search(text):
+        return "ja"
+    if HAN_RE.search(text):
+        return "zh"
+    return ""
+
+
+def lang_attr(text: str) -> str:
+    lang = detect_lang(text)
+    return f' lang="{lang}"' if lang else ""
 
 
 def write_html_with_updates(entries: List[feedparser.FeedParserDict]) -> None:
@@ -153,14 +172,14 @@ layout: page
     for title, link, date, description, sorted_links in items:
         html += f"""
             <li>
-            <strong><a href='{link}'>{title}</a></strong> - Last updated: <span class="post-date">{date.date()}</span> .</br>
-            Description: {description}
+            <strong><a href='{link}'{lang_attr(title)}>{title}</a></strong> - Last updated: <span class="post-date">{date.date()}</span> .</br>
+            Description: <span{lang_attr(description)}>{description}</span>
             <ul>
         """
         for entry_link, entry_title, published_date in sorted_links:    
             html += f"""<li>
             <span class="post-date">{published_date.date()}</span> - 
-            <a href='{entry_link}'>{entry_title}</a></li>\n
+            <a href='{entry_link}'{lang_attr(entry_title)}>{entry_title}</a></li>\n
             """
         html += """</ul>
             </li>

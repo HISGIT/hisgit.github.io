@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="/assets/css/mastodon.css">
 
 {% if page.comments %}
-<section id="comments" class="article-content">
+{% assign comments_lang = page.lang | default: page.language | default: site.lang | default: 'en-US' %}
+<section id="comments" class="article-content" lang="{{ comments_lang }}">
   <h2>Comments</h2>
   <p>With an account on the Fediverse or Mastodon, you can respond to this <a href="https://{{ page.comments.host }}/@{{ page.comments.username }}/{{ page.comments.id }}">post</a>. Since Mastodon is decentralized, you can use your existing account hosted by another Mastodon server or compatible platform if you don't have an account on this one. Known non-private replies are displayed below.</p>
   <p id="mastodon-comments-list"><button id="load-comment">Load comments</button></p>
@@ -79,6 +80,7 @@
               }
 
               const isReply = status.in_reply_to_id !== "{{ page.comments.id }}";
+              const statusLang = status.language || "{{ comments_lang }}";
 
               let op = false;
               if( status.account.acct == "{{ page.comments.username }}" ) {
@@ -118,6 +120,7 @@
               display.className = "display";
               display.setAttribute("itemprop", "author");
               display.setAttribute("itemtype", "http://schema.org/Person");
+              display.setAttribute("lang", statusLang);
               display.innerHTML = status.account.display_name;
 
               let header = document.createElement("header");
@@ -141,6 +144,7 @@
 
               let main = document.createElement("main");
               main.setAttribute("itemprop", "text");
+              main.setAttribute("lang", statusLang);
               main.innerHTML = status.content;
 
               let interactions = document.createElement("footer");
@@ -159,6 +163,7 @@
               comment.className = isReply ? "comment comment-reply" : "comment";
               comment.setAttribute("itemprop", "comment");
               comment.setAttribute("itemtype", "http://schema.org/Comment");
+              comment.setAttribute("lang", statusLang);
               comment.appendChild(avatar);
               comment.appendChild(header);
               comment.appendChild(timestamp);
