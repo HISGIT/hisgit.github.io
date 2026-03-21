@@ -4,7 +4,6 @@ title:  "気軽にテーマコードをカスタマイズしよう"
 # alt_title: "Basically Basic"
 sub_title: "テーマのカスタマイズにより、自分でテーマコードを書く道へ"
 date:   2026-03-14 21:50:00 +0900
-categories: Jekyll
 read_time: true
 ref: apply-to-new-theme
 introduction: |

@@ -4,7 +4,6 @@ title:  "随时修改主题代码"
 # alt_title: "Basically Basic"
 sub_title: "定制主题注定要走上自己编码主题的道路"
 date:   2026-03-14 21:50:00 +0900
-categories: Jekyll
 read_time: true
 ref: apply-to-new-theme
 comments:
