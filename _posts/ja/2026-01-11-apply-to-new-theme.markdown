@@ -6,6 +6,10 @@ sub_title: "テーマのカスタマイズにより、自分でテーマコー�
 date:   2026-03-14 21:50:00 +0900
 read_time: true
 ref: apply-to-new-theme
+comments:
+  host: wxw.moe
+  username: ToT
+  id: 116227599453343515
 introduction: |
     **Basically Basic** は、Jekyll のデフォルトテーマの代わりとなるテーマです --- *[Minima](https://github.com/jekyll/minima)*。Minima に含まれるすべての規約と機能は、**Basically Basic** でも完全にサポートされています。
 ---
