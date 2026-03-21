@@ -211,8 +211,8 @@ Essentially, this setup redirects GitHub Pages traffic to your own domain.
 ## Afterword — Markdown and theme customization
 In follow-up posts, the following topics will be discussed in detail:
 1. Using Markdown in Jekyll
-2. Syntax highlighting and code block display
-3. Theme setup and customization
+2. [Syntax highlighting and code block display]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
+3. [Theme setup and customization]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
 
 ## After-afterword — Implementing multilingual support
-done.
+[Implement multilingual feature partly]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/), done.

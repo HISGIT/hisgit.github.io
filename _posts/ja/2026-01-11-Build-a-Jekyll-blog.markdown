@@ -216,8 +216,8 @@ DNS の反映には時間がかかることがあるので、もう暫く待ち�
 ## あとがき～markdownとカスタマイズリフォーム
 今後、以下の内容について詳しく解説する予定です。
 1. Jekyll における Markdown の使い方
-2. シンタックスハイライトとコードブロック表示
-3. テーマの設定とカスタマイズ
+2. [シンタックスハイライトとコードブロック表示]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
+3. [テーマの設定とカスタマイズ]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
 
 ## さらにあとがき～複数言語機能
-完成。
+[部分実装多言語機能]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)、完成。

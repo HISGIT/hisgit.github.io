@@ -169,10 +169,9 @@ GitHub Pages 使用自定义域名，需要分别在DNS服务商和GitHub账号�
 ## 后话～markdown和个性化义主题
 后续将会对
 1. Jekyll中的markdown使用
-2. 高亮和代码块显示
-3. 主题设置和修改
-
+2. [高亮和代码块显示]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
+3. [主题设置和修改]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)
 这三部分的内容详细说道。
 
 ## 后后话～实现多语言切换功能
-完成。
+[部分实现多语言功能]({{ site.baseurl }}/{{ page.language }}/apply-to-new-theme/)，完成。
