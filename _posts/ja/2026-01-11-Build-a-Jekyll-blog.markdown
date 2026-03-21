@@ -5,9 +5,9 @@ alt_title: "Jekyllブログを構築しよう"
 sub_title: "rubyとjavascriptがわからなくても平気"
 ref: build-a-jekyll-blog
 comments:
-  host: bgme.me
+  host: wxw.moe
   username: ToT
-  id: 116017511628147672
+  id: 116227599453343515
 # actions:
 #   - label: "Learn More"
 #     icon: github  # references name of svg icon, see full list below
