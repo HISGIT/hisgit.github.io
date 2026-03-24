@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_NAME blog-roll)
+# Define the project name and language
+project(blog-roll LANGUAGES NONE)
 
 # ---- Python venv ----
 set(VENV_DIR ${CMAKE_SOURCE_DIR}/blog-roll)
