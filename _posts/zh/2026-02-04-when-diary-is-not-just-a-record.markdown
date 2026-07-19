@@ -3,7 +3,7 @@ layout: post
 title:  "When diary is not just record"
 date:   2026-02-04 19:25:00 +0900
 alt_title: 当日记不仅是日志
-tag: ['daily thoughts']
+tag: ['daily']
 read_time: true
 ref: when-diary-is-not-just-a-record
 comments:

@@ -12,6 +12,7 @@ Thumbs.db
 *.log
 copilot-instructions*
 translate_rule.md
+usage.md
 __??cache__/
 build
 .venv

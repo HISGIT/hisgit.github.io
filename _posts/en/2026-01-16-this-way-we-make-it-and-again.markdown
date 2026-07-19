@@ -3,14 +3,14 @@ layout: post
 title:  "That way we make it and again"
 date:   2026-01-16 23:25:00 +0900
 categories: [blog,]
-tag: ['daily thoughts']
+tag: ['daily']
 read_time: true
 ref: that-way-we-make-it-and-again
 comments:
   host: bgme.me
   username: ToT
   id: 115905457851765384
-iidntroduction: |
+idntroduction: |
     -- **when you’reoT fed up, go for a drive** --
 ---
 I’m feeling really upset inside and need some kind of release.
